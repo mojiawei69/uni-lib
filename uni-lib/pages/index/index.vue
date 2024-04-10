@@ -20,18 +20,25 @@
 			选择相册
 		</view>
 		<image v-for="(item, index) in imgPath" style="width: 50px; height: 50px;" :src="item"></image>
+		<navigator url="../map">
+			<view class="btn">map</view>
+		</navigator>
+		
+		<loading :value="val" />
 	</view>
 </template>
 
 <script>
+	import loading from "@/compoments/loading.vue";
 	import popper from "../../compoments/popper/popper.vue";
 	export default {
 		data() {
 			return {
-				imgPath: []
+				imgPath: [],
+				val: 0,
 			}
 		},
-		components: { popper }, 
+		components: { popper, loading }, 
 		methods:{
 			chooseImg(){
 				uni.chooseFile({
@@ -46,6 +53,11 @@
 					}
 				})
 			}
+		},
+		mounted() {
+			setInterval(() => {
+				this.val++;
+			}, 10)
 		}
 	}
 </script>
